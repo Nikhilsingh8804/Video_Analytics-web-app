@@ -1,0 +1,14 @@
+<?xml version="1.1" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd">
+    <changeSet author="Devayan" id="update-foreign-key-constraints">
+        <dropForeignKeyConstraint baseTableName="likes" constraintName="FK_likes_ideas" />
+        <dropForeignKeyConstraint baseTableName="views" constraintName="FK_views_ideas" />
+        <dropForeignKeyConstraint baseTableName="tag_records" constraintName="FK_tag_records_ideas" />
+        <dropForeignKeyConstraint baseTableName="attachments" constraintName="FK_attachments_ideas" />
+
+        <addForeignKeyConstraint baseColumnNames="idea_id" baseTableName="likes" constraintName="FK_likes_ideas" onDelete="CASCADE" referencedColumnNames="idea_id" referencedTableName="ideas" />
+        <addForeignKeyConstraint baseColumnNames="idea_id" baseTableName="views" constraintName="FK_views_ideas" onDelete="CASCADE" referencedColumnNames="idea_id" referencedTableName="ideas" />
+        <addForeignKeyConstraint baseColumnNames="idea_id" baseTableName="tag_records" constraintName="FK_tag_records_ideas" onDelete="CASCADE" referencedColumnNames="idea_id" referencedTableName="ideas" />
+        <addForeignKeyConstraint baseColumnNames="idea_id" baseTableName="attachments" constraintName="FK_attachments_ideas" onDelete="CASCADE" referencedColumnNames="idea_id" referencedTableName="ideas" />
+    </changeSet>
+</databaseChangeLog>

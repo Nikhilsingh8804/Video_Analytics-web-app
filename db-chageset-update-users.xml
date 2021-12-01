@@ -1,0 +1,42 @@
+<?xml version="1.1" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd">
+
+    <changeSet author="Devayan" id="update-users">
+
+        <dropForeignKeyConstraint baseTableName="attachments" constraintName="FK_attachments_users" />
+        <dropForeignKeyConstraint baseTableName="ideas" constraintName="FK_ideas_users" />
+        <dropForeignKeyConstraint baseTableName="likes" constraintName="FK_likes_users" />
+        <dropPrimaryKey tableName="users" constraintName="PK_users" />
+        <dropColumn tableName="attachments" columnName="user_id" />
+        <dropColumn tableName="ideas" columnName="user_id" />
+        <dropColumn tableName="likes" columnName="user_id" />
+        <dropColumn tableName="users" columnName="user_id" />
+
+        <addColumn tableName="users">
+            <column name="user_id" type="SERIAL" defaultOnNull="true" defaultValueNumeric="0">
+                <constraints unique="true" />
+            </column>
+        </addColumn>
+        <addAutoIncrement columnDataType="INTEGER" columnName="user_id" defaultOnNull="false" generationType="ALWAYS" incrementBy="1" startWith="1" tableName="users" />
+        <addColumn tableName="attachments">
+            <column name="user_id" type="INTEGER" defaultOnNull="true" defaultValueNumeric="0">
+                <constraints nullable="false" foreignKeyName="FK_attachments_users" references="users(user_id)" />
+            </column>
+        </addColumn>
+
+        <addColumn tableName="ideas">
+            <column name="user_id" type="INTEGER" defaultOnNull="true" defaultValueNumeric="0">
+                <constraints nullable="false" foreignKeyName="FK_ideas_users" references="users(user_id)" />
+            </column>
+        </addColumn>
+
+        <addColumn tableName="likes">
+            <column name="user_id" type="INTEGER" defaultOnNull="true" defaultValueNumeric="0">
+                <constraints nullable="false" foreignKeyName="FK_likes_users" references="users(user_id)" />
+            </column>
+        </addColumn>
+
+        <addPrimaryKey tableName="users" columnNames="email" constraintName="PK_users" />
+    </changeSet>
+
+</databaseChangeLog>
